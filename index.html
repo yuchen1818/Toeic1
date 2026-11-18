@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2b4c9b">
+<title>多益 60 天衝刺</title>
+<style>
+:root{--bg:#eef2f7;--card:#fff;--ink:#14213d;--mute:#5b667a;--line:#d5dce8;--hi:#ffd23f;--ok:#1f9d63;--bad:#d64545;--pri:#2b4c9b;--onpri:#fff;color-scheme:light}
+@media(prefers-color-scheme:dark){:root{--bg:#10151f;--card:#1a2230;--ink:#e8edf6;--mute:#9aa7bd;--line:#2c374a;--hi:#8a6d00;--ok:#46c28a;--bad:#ef7676;--pri:#7ea2ff;--onpri:#10151f;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;padding-bottom:env(safe-area-inset-bottom,0)}
+header{background:var(--pri);color:var(--onpri);padding:calc(14px + env(safe-area-inset-top,0)) 16px 12px}
+.wrap{max-width:720px;margin:0 auto}
+h1{font-size:1.15rem;margin:0 0 8px}
+.bar{height:8px;background:rgba(255,255,255,.3);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--hi);width:0;transition:width .4s}
+header small{display:block;margin-top:6px;opacity:.9}
+nav{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex}
+nav button{flex:1;min-height:48px;border:0;background:none;color:var(--mute);font:inherit;font-weight:600;border-bottom:3px solid transparent;cursor:pointer}
+nav button[aria-current=true]{color:var(--pri);border-bottom-color:var(--pri)}
+main{padding:14px 14px 40px}
+section,.card{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--pri);border-radius:6px;padding:14px 16px;margin:0 0 14px}
+h2{font-size:1.05rem;margin:0 0 6px}
+h3{font-size:1rem;margin:14px 0 6px}
+p{margin:6px 0}.mute{color:var(--mute);font-size:.9rem}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+select,input,button.main,button.alt{font:inherit;min-height:44px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:0 12px}
+button.main{background:var(--pri);color:var(--onpri);border-color:var(--pri);font-weight:700;cursor:pointer;width:100%}
+button.alt{cursor:pointer}
+.fc{border:1px dashed var(--line);border-radius:6px;padding:12px 14px;margin:8px 0;cursor:pointer;user-select:none}
+.fc .f{display:flex;justify-content:space-between;align-items:center}
+.fc .w{font-size:1.4rem;font-weight:700;background:linear-gradient(transparent 58%,var(--hi) 58%)}
+.fc .b{margin-top:4px;font-size:1.05rem}
+.sp{border:0;background:none;font-size:1.3rem;min-width:44px;min-height:44px;cursor:pointer}
+.q{padding:10px 0;border-top:1px solid var(--line)}
+.q:first-of-type{border-top:0}
+.o{display:block;width:100%;text-align:left;min-height:44px;margin:6px 0;padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
+.o.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,var(--card))}
+.o.no{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 18%,var(--card))}
+.ex{font-size:.92rem;color:var(--mute);margin:4px 0 0}
+.sc{float:right;font-weight:700;color:var(--pri)}
+.tip{background:color-mix(in srgb,var(--hi) 25%,var(--card));padding:8px 12px;border-radius:6px}
+.wl{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-top:1px solid var(--line)}
+.wl:first-child{border-top:0}
+table{width:100%;border-collapse:collapse;font-size:.92rem}td,th{padding:6px 4px;border-top:1px solid var(--line);text-align:left;vertical-align:top}
+:focus-visible{outline:3px solid var(--pri);outline-offset:2px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header><div class="wrap"><h1>多益 60 天衝刺</h1><div class="bar"><i id="pb"></i></div><small id="ps"></small></div></header>
+<nav><div class="wrap" id="nav"></div></nav>
+<main><div class="wrap" id="app"></div></main>
+<script src="data-more.js"></script>
+<script>
+/* ===== 資料區：想加單字或題目，直接在這裡增加即可 ===== */
+// 單字：英文|詞性|中文 ；每天 3 個，共 60 天
+const W=`schedule|n./v.|時間表；安排
+appointment|n.|約定；預約
+deadline|n.|截止期限
+manager|n.|經理
+employee|n.|員工
+colleague|n.|同事
+meeting|n.|會議
+agenda|n.|議程
+attend|v.|出席
+contract|n.|合約
+sign|v.|簽署
+agreement|n.|協議
+invoice|n.|發票；請款單
+payment|n.|付款
+receipt|n.|收據
+order|n./v.|訂單；訂購
+deliver|v.|運送
+shipment|n.|出貨；貨物
+customer|n.|顧客
+service|n.|服務
+complaint|n.|抱怨
+refund|n./v.|退款
+exchange|v.|換貨；交換
+warranty|n.|保固
+price|n.|價格
+discount|n.|折扣
+offer|n./v.|提供；優惠
+budget|n.|預算
+expense|n.|費用
+cost|n./v.|成本；花費
+salary|n.|薪水
+bonus|n.|獎金
+benefit|n.|福利
+resume|n.|履歷
+apply|v.|申請
+candidate|n.|應徵者
+interview|n./v.|面試
+position|n.|職位
+experience|n.|經驗
+hire|v.|僱用
+train|v.|訓練
+promote|v.|升遷；促銷
+office|n.|辦公室
+department|n.|部門
+branch|n.|分公司
+report|n./v.|報告
+review|n./v.|審查；評論
+submit|v.|提交
+project|n.|專案
+task|n.|任務
+goal|n.|目標
+client|n.|客戶
+partner|n.|合夥人
+supplier|n.|供應商
+product|n.|產品
+quality|n.|品質
+brand|n.|品牌
+market|n.|市場
+sales|n.|銷售
+profit|n.|利潤
+advertise|v.|刊登廣告
+campaign|n.|宣傳活動
+launch|v.|推出
+flight|n.|航班
+passenger|n.|乘客
+luggage|n.|行李
+reserve|v.|預訂
+available|adj.|可用的；有空的
+reservation|n.|預約
+delay|n./v.|延誤
+cancel|v.|取消
+arrive|v.|抵達
+hotel|n.|旅館
+check in|v.|辦理入住
+accommodation|n.|住宿
+ticket|n.|票
+fare|n.|票價
+destination|n.|目的地
+restaurant|n.|餐廳
+menu|n.|菜單
+beverage|n.|飲料
+expire|v.|到期
+valid|adj.|有效的
+renew|v.|更新；續約
+install|v.|安裝
+repair|v./n.|修理
+maintenance|n.|維修保養
+equipment|n.|設備
+device|n.|裝置
+replace|v.|更換
+require|v.|需要；要求
+necessary|adj.|必要的
+provide|v.|提供
+include|v.|包含
+attach|v.|附上
+enclose|v.|隨函附上
+inform|v.|通知
+notify|v.|通知
+announce|v.|宣布
+request|n./v.|要求
+confirm|v.|確認
+approve|v.|批准
+respond|v.|回應
+reply|v./n.|回覆
+inquiry|n.|詢問
+address|n./v.|地址；處理
+contact|v./n.|聯絡
+forward|v.|轉寄；轉交
+policy|n.|政策
+regulation|n.|規定
+comply|v.|遵守
+safety|n.|安全
+inspect|v.|檢查
+prohibit|v.|禁止
+increase|v./n.|增加
+decrease|v./n.|減少
+reduce|v.|降低
+improve|v.|改善
+efficient|adj.|有效率的
+effective|adj.|有效果的
+significant|adj.|重大的
+rapidly|adv.|快速地
+gradually|adv.|逐漸地
+currently|adv.|目前
+recently|adv.|最近
+previously|adv.|先前
+nearly|adv.|幾乎
+approximately|adv.|大約
+exactly|adv.|確切地
+responsible|adj.|負責的
+qualified|adj.|合格的
+experienced|adj.|有經驗的
+familiar|adj.|熟悉的
+eligible|adj.|有資格的
+reliable|adj.|可靠的
+convenient|adj.|方便的
+flexible|adj.|有彈性的
+temporary|adj.|暫時的
+permanent|adj.|永久的
+mandatory|adj.|強制的
+optional|adj.|可選擇的
+relocate|v.|搬遷
+expand|v.|擴展
+merge|v.|合併
+acquire|v.|取得；收購
+invest|v.|投資
+revenue|n.|營收
+negotiate|v.|談判
+propose|v.|提議
+proposal|n.|提案
+assist|v.|協助
+cooperate|v.|合作
+coordinate|v.|協調
+assign|v.|指派
+delegate|v.|委派
+supervise|v.|監督
+attendee|n.|與會者
+registration|n.|報名；註冊
+session|n.|場次；時段
+conference|n.|研討會
+presentation|n.|簡報
+handout|n.|講義
+renovation|n.|整修
+facility|n.|設施
+occupy|v.|佔用
+shortage|n.|短缺
+inventory|n.|庫存
+supply|n./v.|供應
+seasonal|adj.|季節性的
+annual|adj.|年度的
+quarterly|adj.|每季的
+authorize|v.|授權
+entitle|v.|賦予資格
+reimburse|v.|報銷
+consequently|adv.|因此
+otherwise|adv.|否則
+nevertheless|adv.|儘管如此
+accomplish|v.|完成
+commitment|n.|承諾
+anticipate|v.|預期`.split("\n").map(l=>{const[w,p,m]=l.split("|");return{w,p,m}});
+if(typeof MORE_W!=="undefined"){const seen=new Set(W.map(x=>x.w));MORE_W.trim().split("\n").forEach(l=>{const[w,p,m]=l.split("|");if(w&&m&&!seen.has(w)){seen.add(w);W.push({w,p,m})}})}
+
+// 文法：10 個主題循環；每題 [題目, "選項A|B|C|D", 正解索引(0起算), 解析]
+const G=[
+["動詞時態","看時間詞：yesterday / last / ago → 過去式；every day / usually → 現在式；tomorrow / next → will + 原形；since / for + 一段時間 → 現在完成式。",[
+["The meeting ___ at 9 a.m. yesterday.","starts|started|will start|starting",1,"yesterday → 過去式 started"],
+["She ___ to the office every morning.","go|goes|going|went",1,"every morning 表習慣；第三人稱單數加 s"],
+["We ___ the report to you tomorrow.","send|sent|will send|sending",2,"tomorrow → will + 原形"],
+["He ___ here since 2020.","works|worked|has worked|will work",2,"since → 現在完成式"]]],
+["主詞與動詞一致","單數主詞配單數動詞。「of + 名詞」不是主詞，例如 The list of items 的主詞是 list。each / every / one of 後面接單數動詞。",[
+["The manager ___ in the office now.","is|are|be|were",0,"manager 單數 → is"],
+["The list of items ___ attached.","are|is|were|have",1,"主詞是 list（單數）"],
+["Each employee ___ a badge.","have|has|having|are",1,"each + 單數動詞"],
+["Our clients ___ satisfied with the service.","is|was|are|be",2,"clients 複數 → are"]]],
+["詞性判斷","名詞：冠詞／所有格／形容詞後面；形容詞：修飾名詞或放 be 動詞後；副詞：修飾動詞／形容詞（常見 -ly）；動詞：主詞後面。",[
+["The company made a ___ decision.","quick|quickly|quicken|quickness",0,"a ___ decision：修飾名詞用形容詞"],
+["Please complete the form ___.","careful|carefully|care|cared",1,"修飾動詞 complete → 副詞"],
+["Her ___ to the team was valuable.","contribute|contributed|contribution|contributing",2,"Her 後面接名詞"],
+["The new software is very ___.","use|useful|usefully|using",1,"be very + 形容詞"]]],
+["介系詞","時間：at + 時刻、on + 日期／星期、in + 月／年；by + 期限（在…之前）；for + 一段時間；during + 事件期間；since + 起點。",[
+["The meeting is ___ Monday.","at|on|in|by",1,"星期用 on"],
+["The store opens ___ 10 a.m.","at|on|in|during",0,"時刻用 at"],
+["Submit the report ___ Friday.","by|during|since|in",0,"by 表示期限前完成"],
+["She was absent ___ the conference.","for|during|since|by",1,"during + 事件"]]],
+["被動語態","被動 = be + 過去分詞。主詞是動作的承受者，如 The invoice was sent。by + 執行者常可省略。",[
+["The invoice ___ yesterday.","sent|was sent|is sending|has send",1,"發票被寄出 → was sent"],
+["All orders ___ within two days.","deliver|delivers|are delivered|delivering",2,"訂單被運送 → are delivered"],
+["The room ___ by the staff now.","is cleaning|is being cleaned|cleans|cleaned",1,"現在進行被動 is being + p.p."],
+["The new policy will ___ next month.","announce|be announced|announcing|announced",1,"will be + p.p."]]],
+["代名詞","主格 I/he/she/they；受格 me/him/her/them；所有格 my/his/her/their（後面接名詞）；反身代名詞 himself/themselves（主詞與受詞同一人）。",[
+["Please send ___ the file.","I|my|me|mine",2,"動詞後的受詞用受格 me"],
+["The employees finished ___ work early.","they|their|them|theirs",1,"後面接名詞 work → 所有格"],
+["The CEO introduced ___ at the event.","him|himself|he|his",1,"主詞與受詞同一人 → himself"],
+["Ms. Lin said ___ would join us.","she|her|hers|herself",0,"would 前面缺主詞 → 主格"]]],
+["連接詞與轉折","although + 子句；despite / in spite of + 名詞；because + 子句；because of + 名詞；however 用來連接兩個句子，後面加逗號。",[
+["___ the rain, the event continued.","Although|Despite|Because|However",1,"the rain 是名詞 → Despite"],
+["We were late ___ the traffic.","because|because of|although|so",1,"the traffic 是名詞 → because of"],
+["___ he was tired, he finished the work.","Although|Despite|Because of|During",0,"後面是完整子句 → Although"],
+["The price is high; ___, the quality is excellent.","but|however|because|although",1,"分號後用 however,"]]],
+["關係代名詞","人用 who，物用 which，人或物皆可用 that；whose 表所有；地點用 where。關代後面的子句會缺主詞或受詞。",[
+["The man ___ called you is my boss.","who|which|whose|where",0,"先行詞是人，且缺主詞 → who"],
+["The report ___ is on the desk is mine.","who|which|whose|where",1,"先行詞是物 → which"],
+["She is the manager ___ team won the award.","who|which|whose|that",2,"manager 的 team → whose"],
+["This is the office ___ I work.","which|who|where|whose",2,"地點 + 完整子句 → where"]]],
+["條件句","可能發生：If + 現在式, will + 原形；與現在事實相反：If + 過去式, would + 原形（be 動詞一律用 were）；unless = if … not。",[
+["If it rains, we ___ the picnic.","cancel|will cancel|would cancel|canceled",1,"if + 現在式 → will + 原形"],
+["If I ___ you, I would accept the offer.","am|was|were|be",2,"假設語氣用 were"],
+["___ you sign the form, we can't process it.","If|Unless|Although|Since",1,"unless = 除非"],
+["If she ___ more time, she would finish it.","has|had|will have|have",1,"would 搭配 if + 過去式"]]],
+["比較級與數量詞","比較：-er / more … than；最高級：the -est / the most；many + 可數、much + 不可數；few / little 表「幾乎沒有」，a few / a little 表「有一些」。",[
+["This plan is ___ than the old one.","good|better|best|more good",1,"good 的比較級是 better"],
+["We have too ___ customers today.","much|many|more much|a little",1,"customers 可數 → many"],
+["She is the ___ employee in the team.","more experienced|most experienced|experiencing|experience",1,"the + 最高級"],
+["There is ___ time left, so hurry.","few|many|little|a few",2,"time 不可數、表示不夠 → little"]]]
+];
+if(typeof MORE_G!=="undefined")MORE_G.forEach((qs,i)=>G[i][2].push(...qs));
+const PH=[
+["打底期（第 1–20 天）","300 → 400","先把最常考的職場單字和基本句型（時態、詞性、主詞動詞一致）打穩。重點是每天不間斷。","每天加 10 分鐘：用手機聽 1 段英文並跟著唸。"],
+["成長期（第 21–40 天）","400 → 480","開始認得出 Part 5 的考法：介系詞、被動、代名詞。單字開始用「複習 + 新字」輪流滾動。","每天加 15 分鐘：做 5–10 題 Part 5 或 Part 2 聽力。"],
+["衝刺期（第 41–60 天）","480 → 550","高頻形容詞／副詞、連接詞、關係代名詞、條件句。每 7 天有一次大複習。","每天加 20 分鐘：練真題或模擬題，並整理錯題。"]];
+
+/* ===== 程式區 ===== */
+const $=s=>document.querySelector(s),QM={};
+let S={};try{S=JSON.parse(localStorage.getItem("toeic60")||"{}")}catch(e){}
+S.done=S.done||{};S.wrong=S.wrong||{};
+const save=()=>{try{localStorage.setItem("toeic60",JSON.stringify(S))}catch(e){}};
+if(!S.day)S.day=(()=>{for(let i=1;i<=60;i++)if(!S.done[i])return i;return 60})();
+let V="today";
+const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const WPD=20;
+const wordsOf=d=>W.slice((d-1)*WPD,d*WPD);
+const reviewOf=d=>{const rd=d%7===0;let p=[];for(let i=Math.max(1,d-(rd?6:2));i<d;i++)p=p.concat(wordsOf(i));return sh(p).slice(0,rd?12:8)};
+const vItem=(w,i)=>{const o=sh([w.m,...sh(W.filter(x=>x.m!==w.m)).slice(0,3).map(x=>x.m)]);
+ return{k:"v:"+w.w,q:`<b>${w.w}</b> 的意思是？`,o,a:o.indexOf(w.m),e:`${w.w}（${w.p}）＝ ${w.m}`}};
+const gi=q=>({k:"g:"+q[0],q:q[0].replace("___","＿＿＿"),o:q[1].split("|"),a:q[2],e:q[3]});
+const gItems=d=>{const t=(d-1)%10,r=Math.floor((d-1)/10),own=G[t][2],n=own.length;
+ const a=[0,1,2,3,4].map(i=>own[(r*5+i)%n]);
+ const b=[1,2,3].filter(j=>d>10||t-j>=0).map(j=>{const o=G[(t+10-j)%10][2];return o[(r*3+j)%o.length]});
+ return[...a,...b].map(gi)};
+const qc=it=>{QM[it.k]=it;return`<div class="q" data-k="${it.k.replace(/"/g,"&quot;")}"><p>${it.q}</p>${it.o.map((o,i)=>`<button class="o" data-i="${i}">${o}</button>`).join("")}<p class="ex" hidden></p></div>`};
+const fc=w=>`<div class="fc" tabindex="0" role="button"><div class="f"><span class="w">${w.w}</span><button class="sp" data-s="${w.w}" aria-label="播放發音">🔊</button></div><div class="b" hidden>${w.p}　${w.m}</div><small class="mute">點一下看中文</small></div>`;
+const sec=(t,items)=>`<section data-t="${items.length}"><span class="sc">0 / ${items.length}</span><h2>${t}</h2>${items.map(qc).join("")}</section>`;
+
+const views={
+today(){const d=S.day,ph=d<=20?0:d<=40?1:2,nw=wordsOf(d),rv=reviewOf(d),g=G[(d-1)%10];
+ const opts=Array.from({length:60},(_, i)=>`<option value="${i+1}" ${i+1===d?"selected":""}>第 ${i+1} 天${S.done[i+1]?" ✓":""}</option>`).join("");
+ return`<div class="card"><div class="row"><button class="alt" id="prev" aria-label="前一天">‹</button><select id="sel" aria-label="選擇天數">${opts}</select><button class="alt" id="next" aria-label="後一天">›</button></div>
+ <p class="mute">${PH[ph][0]}｜${d%7===0?"今天是大複習日：複習這週的單字":"約 45 分鐘：20 個新單字 + 測驗 + 8 題文法"}</p></div>
+ <section><h2>1. 今天的新單字</h2><p class="mute">先看英文、自己想中文，再點開確認。按 🔊 聽發音。</p>${nw.length?nw.map(fc).join(""):"<p>這一天的單字還沒填入。請在 data-more.js 補上，或回來請我繼續產生下一批。</p>"}</section>
+ ${nw.length?sec(d%7===0?"2. 單字測驗 + 本週大複習":"2. 單字測驗（新字 + 複習）",sh([...nw,...rv]).map(vItem)):""}
+ <section><h2>3. 文法：${g[0]}</h2><p class="tip">${g[1]}</p></section>
+ ${sec("4. 文法練習（今日主題 + 綜合複習）",gItems(d))}
+ <button class="main" id="done">${S.done[d]?"已完成 ✓（點一下取消）":"完成今天的練習"}</button>`},
+plan(){return PH.map(p=>`<div class="card"><h2>${p[0]}　${p[1]} 分</h2><p>${p[2]}</p><p class="tip">${p[3]}</p></div>`).join("")+
+ `<div class="card"><h2>每天怎麼安排</h2><table><tr><td>15 分鐘</td><td>看 20 個新單字、聽發音</td></tr><tr><td>10 分鐘</td><td>單字測驗（含前兩天的複習）</td></tr><tr><td>15 分鐘</td><td>文法重點 + 8 題（5 題今日主題、3 題綜合複習）</td></tr><tr><td>10–20 分鐘</td><td>聽力或閱讀加練（見各階段建議）</td></tr></table>
+ <p class="mute">每第 7、14、21… 天是大複習日。答錯的題目會進「錯題本」，答對後自動移除。</p></div>
+ <div class="card"><h2>老實說</h2><p>目前收錄 ${W.length} 個單字（每天 ${WPD} 個，已排到第 ${Math.floor(W.length/WPD)} 天）和 ${G.reduce((a,g)=>a+g[2].length,0)} 道文法題。要從 300 進步到 550，還需要搭配聽力與真題練習。進度存在這支手機或電腦的瀏覽器中，換裝置不會同步。</p></div>`},
+words(){return`<div class="card"><input id="q" placeholder="搜尋單字或中文" style="width:100%" aria-label="搜尋"></div><div class="card" id="wl">${W.map((w,i)=>`<div class="wl" data-s="${(w.w+w.m).toLowerCase()}"><span><b>${w.w}</b> <span class="mute">${w.p}</span></span><span>${w.m}<span class="mute">　D${Math.floor(i/WPD)+1}</span></span></div>`).join("")}</div>`},
+wrong(){const a=Object.values(S.wrong);if(!a.length)return`<div class="card"><h2>錯題本是空的</h2><p>答錯的題目會出現在這裡，之後答對就會自動移除。</p></div>`;
+ return`<div class="card"><h2>共 ${a.length} 題待加強</h2><p class="mute">再做一次，答對後自動移出。</p></div>`+`<section>${a.map(qc).join("")}</section>`}
+};
+const tabs=[["today","今日"],["plan","計畫"],["words","單字庫"],["wrong","錯題本"]];
+function render(){const n=Object.keys(S.wrong).length;
+ $("#nav").innerHTML=tabs.map(t=>`<button data-v="${t[0]}" aria-current="${V===t[0]}">${t[1]}${t[0]==="wrong"&&n?` (${n})`:""}</button>`).join("");
+ $("#app").innerHTML=views[V]();
+ const c=Object.keys(S.done).length;$("#pb").style.width=c/60*100+"%";$("#ps").textContent=`已完成 ${c} / 60 天`}
+const go=d=>{S.day=Math.min(60,Math.max(1,d));save();V="today";render();scrollTo(0,0)};
+const speak=t=>{if(!window.speechSynthesis)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.85;speechSynthesis.speak(u)};
+document.addEventListener("click",e=>{const t=e.target;
+ if(t.closest(".sp")){speak(t.closest(".sp").dataset.s);return}
+ const f=t.closest(".fc");if(f){f.querySelector(".b").hidden=!f.querySelector(".b").hidden;return}
+ const o=t.closest(".o");
+ if(o){const q=o.closest(".q"),it=QM[q.dataset.k],i=+o.dataset.i;if(q.dataset.d)return;q.dataset.d=1;
+  q.querySelectorAll(".o")[it.a].classList.add("ok");
+  if(i===it.a){q.classList.add("right");if(S.wrong[it.k]){delete S.wrong[it.k];save()}}else{o.classList.add("no");S.wrong[it.k]=it;save()}
+  const ex=q.querySelector(".ex");ex.hidden=false;ex.textContent=(i===it.a?"答對了！":"答錯了。")+it.e;
+  const s=q.closest("section");s.querySelector(".sc").textContent=`${s.querySelectorAll(".right").length} / ${s.querySelectorAll(".q").length}`;
+  const n=Object.keys(S.wrong).length;document.querySelector('[data-v=wrong]').textContent="錯題本"+(n?` (${n})`:"");return}
+ if(t.dataset.v){V=t.dataset.v;render();return}
+ if(t.id==="prev")go(S.day-1);if(t.id==="next")go(S.day+1);
+ if(t.id==="done"){S.done[S.day]=!S.done[S.day];if(!S.done[S.day])delete S.done[S.day];save();
+  if(S.done[S.day]&&S.day<60)go(S.day+1);else render()}});
+document.addEventListener("change",e=>{if(e.target.id==="sel")go(+e.target.value)});
+document.addEventListener("input",e=>{if(e.target.id==="q"){const v=e.target.value.trim().toLowerCase();document.querySelectorAll("#wl .wl").forEach(r=>r.hidden=!r.dataset.s.includes(v))}});
+render();
+</script>
+</body>
+</html>
